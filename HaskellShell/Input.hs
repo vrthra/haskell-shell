@@ -3,7 +3,7 @@ import System.IO
 import System.Posix.Env
 import System.Posix.Signals
 
-promptInput = do 
+promptInput = do
               installHandler keyboardSignal (Catch newShellPrompt) Nothing
               shellPrompt
               input <- getInput

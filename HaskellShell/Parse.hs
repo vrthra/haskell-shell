@@ -15,7 +15,7 @@ parsePipeline = map parsePipelineElement . S.split (S.keepDelimsR $ (S.whenElt (
 
 parsePipelineElement :: [ShellToken] -> G.PipelineElement
 parsePipelineElement = (\(cmd, rs) -> (parseCommand cmd, parseRedirections rs)) . break (isOperator redirectionOperators)
-                          
+
 parseRedirections :: [ShellToken] -> [G.Redirection]
 parseRedirections ((Operator "|" ):xs) = ([stdOutput], G.Pipe)
                                          : parseRedirections xs
