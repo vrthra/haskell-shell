@@ -4,7 +4,7 @@ import qualified Data.Map as Map
 import System.Exit
 import System.Directory
 import System.IO
-import System.Posix.Env
+import System.Posix.Env (setEnv)
 import System.Posix.Process as PP
 import qualified System.Process as P (StdStream(..))
 import HaskellShell.Error
