@@ -29,3 +29,5 @@ find /files | grep err |mv mydir
 ```
 * Need a better case statement able to use regex (and avoid awk, and grep)
 * mkdir should accept a list of files in stdin
+* Atleast simple statistics should be possible directly from command line, perhaps as a command that understands pipes.
+* Atleast simple ploting, with the ploting grammar in R ggplot, but more approachable, and easy for simple use.
