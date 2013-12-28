@@ -35,3 +35,4 @@ find /files | grep err |mv mydir
 * Consistant naming conventions with ! appended for things that modify file system or environment like rm!
 
 To check later [xkcd forum about shells](http://forums.xkcd.com/viewtopic.php?f=40&t=77634)
+Also see [ars](http://arstechnica.com/business/2005/10/msh/) about powershell
