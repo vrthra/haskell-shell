@@ -33,3 +33,5 @@ find /files | grep err |mv mydir
 * Atleast simple ploting, with the ploting grammar in R ggplot, but more approachable, and easy for simple use.
 * Fixed record syntax with fields separated by tabs and records separated by newlines.
 * Consistant naming conventions with ! appended for things that modify file system or environment like rm!
+
+To check later [xkcd forum about shells](http://forums.xkcd.com/viewtopic.php?f=40&t=77634)
