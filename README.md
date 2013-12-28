@@ -11,7 +11,7 @@ I am using this as a vehicle to note down what I want my shell to look like (com
 * Allow left assignment like in R. i.e defintion of a command should be painless, like `find /files | grep err -> mycmd` which should define a new command mycmd
 * Dont go for little languages like awk and sed. Where possible incorporate that into the shell. This will help avoid the quoting hell.
 * Use nesting braces for quoting strings if necessary.
-
+* Need an RStudio like interface (or the plan9 drawterm) that can handle arbitrary drawing, but this is much later.
 * We should be able to use multiple named streams indicated by a starting : after a pipe.
 
 * rm should remove files given in stdin by default rather than files given in args, and it should print the names of files
