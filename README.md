@@ -32,3 +32,4 @@ find /files | grep err |mv mydir
 * Atleast simple statistics should be possible directly from command line, perhaps as a command that understands pipes.
 * Atleast simple ploting, with the ploting grammar in R ggplot, but more approachable, and easy for simple use.
 * Fixed record syntax with fields separated by tabs and records separated by newlines.
+* Consistant naming conventions with ! appended for things that modify file system or environment like rm!
