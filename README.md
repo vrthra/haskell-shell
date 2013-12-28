@@ -7,6 +7,11 @@ I am using this as a vehicle to note down what I want my shell to look like (com
 
 
 # TODO
+* The shell should be oriented towards interactive usage. So allow things like converting spaces in file names to nonbreaking space different from the breaking space when you press space bar. So avoid having to quote your arguments.
+* Allow left assignment like in R. i.e defintion of a command should be painless, like `find /files | grep err -> mycmd` which should define a new command mycmd
+* Dont go for little languages like awk and sed. Where possible incorporate that into the shell. This will help avoid the quoting hell.
+* Use nesting braces for quoting strings if necessary.
+
 * We should be able to use multiple named streams indicated by a starting : after a pipe.
 
 * rm should remove files given in stdin by default rather than files given in args, and it should print the names of files
