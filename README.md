@@ -15,7 +15,7 @@ I am using this as a vehicle to note down what I want my shell to look like (com
 * We should be able to use multiple named streams indicated by a starting : after a pipe.
 * Repurpose > for arithmetic. define '>' as a command to write to files. So `ls -1 | wc -l |>out` should work, and so should `seq | where $1 > 2` also should work. Similarly, use `<` as cat.
 * Easily definable literal syntax with standard definitions for lots of common units, and their conversions. (like rebol)
- for example, it should be possible to define email syntax in regex, and a literal to input this email, units for meters, centi meters, grams, converters for suffixes like Mega, Kilo etc.
+ for example, it should be possible to define email syntax in regex, and a literal to input this email, units for meters, centi meters, grams, converters for suffixes like Mega, Kilo etc, and how to compare between two instances.
 
 * rm should remove files given in stdin by default rather than files given in args, and it should print the names of files
 it was unable to remove into stream :no.
