@@ -5,7 +5,7 @@ initializeEnvironment :: IO ()
 initializeEnvironment = mapM_ (\(k, v) -> setEnv k v False) defaultEnvironment
 
 defaultEnvironment = [ ("HISTSIZE", "10" )
-                     , ("PS1",      ">> ")
+                     , ("PS1",      "| ")
                      , ("PS2",      "> " )
                      ]
 
