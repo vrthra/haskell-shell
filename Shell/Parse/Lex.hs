@@ -1,4 +1,4 @@
-module HaskellShell.Parse.Lex
+module Shell.Parse.Lex
      ( ShellToken(..)
      , showToken
      , lexInput

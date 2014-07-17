@@ -1,4 +1,4 @@
-module HaskellShell.Input (promptInput) where
+module Shell.Input (promptInput) where
 import qualified System.IO as SIO
 import qualified System.Posix.Env as Env
 import qualified System.Posix.Signals as Signals

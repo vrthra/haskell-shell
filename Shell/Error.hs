@@ -1,4 +1,4 @@
-module HaskellShell.Error (shellError, shellException) where
+module Shell.Error (shellError, shellException) where
 import Control.Exception
 import Data.List (intercalate)
 import Data.Maybe

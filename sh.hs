@@ -2,10 +2,10 @@
 import System.IO
 import qualified System.IO.Error as IOE
 
-import HaskellShell.Input
-import HaskellShell.Parse
-import HaskellShell.Run
-import HaskellShell.State
+import Shell.Input
+import Shell.Parse
+import Shell.Run
+import Shell.State
 
 main = initializeState >>= shellLoop
 

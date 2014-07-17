@@ -1,4 +1,4 @@
-module HaskellShell.State.Environment (initializeEnvironment, readEnv) where
+module Shell.State.Environment (initializeEnvironment, readEnv) where
 import System.Posix.Env
 
 initializeEnvironment :: IO ()

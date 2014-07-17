@@ -1,6 +1,6 @@
-module HaskellShell.State (ShellState(..), initializeState, pushHistory) where
-import HaskellShell.State.History
-import HaskellShell.State.Environment
+module Shell.State (ShellState(..), initializeState, pushHistory) where
+import Shell.State.History
+import Shell.State.Environment
 
 data ShellState = ShellState { history :: History }
                   deriving Show

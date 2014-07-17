@@ -1,8 +1,8 @@
-module HaskellShell.Parse (parseInput) where
+module Shell.Parse (parseInput) where
 import qualified Data.List.Split as S
 import System.Posix.IO (stdInput, stdOutput, stdError)
-import qualified HaskellShell.Grammar as G
-import HaskellShell.Parse.Lex
+import qualified Shell.Grammar as G
+import Shell.Parse.Lex
 
 -- TODO : Switch to parsec
 

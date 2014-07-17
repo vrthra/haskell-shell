@@ -1,4 +1,4 @@
-module HaskellShell.State.History where
+module Shell.State.History where
 import Data.Foldable (toList)
 
 type HistoryEntry = (Int, String)

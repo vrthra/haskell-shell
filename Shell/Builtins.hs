@@ -1,4 +1,4 @@
-module HaskellShell.Builtins (builtins, runBuiltin) where
+module Shell.Builtins (builtins, runBuiltin) where
 import Control.Exception
 import qualified Data.Map as Map
 import System.Exit
@@ -7,10 +7,10 @@ import System.IO
 import System.Posix.Env (setEnv)
 import qualified System.Posix.Process as PP
 import qualified System.Process as P (StdStream(..))
-import HaskellShell.Error
-import HaskellShell.State
-import HaskellShell.State.History (getHistory)
-import qualified HaskellShell.Grammar as G
+import Shell.Error
+import Shell.State
+import Shell.State.History (getHistory)
+import qualified Shell.Grammar as G
 
 type Builtin = ShellState -> Maybe Handle -> [String] -> IO ()
 

@@ -1,4 +1,4 @@
-module HaskellShell.Run (runList) where
+module Shell.Run (runList) where
 
 import Control.Exception (bracket, catch, IOException)
 import qualified Control.Monad as M
@@ -10,10 +10,10 @@ import System.Posix.Process
 import System.Posix.IO
 import System.Posix.Types (Fd, ProcessID)
 
-import HaskellShell.Builtins
-import HaskellShell.Error
-import qualified HaskellShell.Grammar as G
-import HaskellShell.State
+import Shell.Builtins
+import Shell.Error
+import qualified Shell.Grammar as G
+import Shell.State
 
 runList :: ShellState -> G.List -> IO ()
 runList st = mapM_ (runPipeline st (stdin, False))

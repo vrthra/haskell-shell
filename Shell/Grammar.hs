@@ -1,4 +1,4 @@
-module HaskellShell.Grammar where
+module Shell.Grammar where
 import System.Posix.Types (Fd)
 
 type Stream = Fd
