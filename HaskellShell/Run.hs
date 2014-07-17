@@ -61,7 +61,7 @@ runPipeline st (input, close) ((cmd, rs):rem) = do
 closeHandle :: Handle -> IO ()
 closeHandle = handleToFd M.>=> closeFd
 
-runCommand :: ShellState -> G.Command -> [(Fd, Handle)] -> IO (Maybe ProcessID)
+runCommand :: ShellState -> [String] -> [(Fd, Handle)] -> IO (Maybe ProcessID)
 runCommand _ [] _  = return Nothing
 runCommand st cmd fds = case lookup (head cmd) builtins of
   Just builtin -> do

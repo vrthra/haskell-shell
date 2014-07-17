@@ -20,16 +20,11 @@ parsePipelineElement :: [ShellToken] -> G.PipelineElement
 parsePipelineElement lst = (\(cmd, rs) -> (parseCommand cmd, parseRedirections rs)) $ break (isOperator redirectionOperators) lst
 
 parseRedirections :: [ShellToken] -> [G.Redirection]
-parseRedirections ((Operator "|" ):xs) = ([stdOutput], G.Pipe)
-                                         : parseRedirections xs
-parseRedirections ((Operator "|&"):xs) = ([stdOutput, stdError], G.Pipe)
-                                         : parseRedirections xs
-parseRedirections ((Operator ">" ):(Word s):xs) = ([stdOutput], G.File s)
-                                                  : parseRedirections xs
-parseRedirections ((Operator ">>"):(Word s):xs) = ([stdOutput], G.AppendFile s)
-                                                  : parseRedirections xs
-parseRedirections ((Operator ">&"):(Word s):xs) = ([stdOutput, stdError], G.File s)
-                                                  : parseRedirections xs
+parseRedirections ((Operator "|" ):xs) = ([stdOutput], G.Pipe) : parseRedirections xs
+parseRedirections ((Operator "|&"):xs) = ([stdOutput, stdError], G.Pipe) : parseRedirections xs
+parseRedirections ((Operator ">" ):(Word s):xs) = ([stdOutput], G.File s) : parseRedirections xs
+parseRedirections ((Operator ">>"):(Word s):xs) = ([stdOutput], G.AppendFile s) : parseRedirections xs
+parseRedirections ((Operator ">&"):(Word s):xs) = ([stdOutput, stdError], G.File s) : parseRedirections xs
 parseRedirections (_:xs) = parseRedirections xs
 parseRedirections []     = []
 
