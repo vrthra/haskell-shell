@@ -31,7 +31,8 @@ find /files | grep err |mv mydir
 * mkdir should accept a list of files in stdin
 * Atleast simple statistics should be possible directly from command line, perhaps as a command that understands pipes.
 * Atleast simple ploting, with the ploting grammar in R ggplot, but more approachable, and easy for simple use.
-* Fixed record syntax with fields separated by tabs and records separated by newlines.
+* Fixed record syntax using ACII separators 28-31
+  http://ronaldduncan.wordpress.com/category/software/file-formats/
 * Consistant naming conventions with ! appended for things that modify file system or environment like rm!
 
 To check later [xkcd forum about shells](http://forums.xkcd.com/viewtopic.php?f=40&t=77634)
