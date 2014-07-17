@@ -16,7 +16,7 @@ import qualified Shell.Grammar as G
 import Shell.State
 
 runList :: ShellState -> G.List -> IO ()
-runList st = mapM_ (runPipeline st (stdin, False))
+runList state glist = mapM_ (runPipeline state (stdin, False)) glist
 
 runPipeline :: ShellState -> (Handle, Bool) -> [G.PipelineElement] -> IO ()
 runPipeline _  (input, True) [] = closeHandle input

@@ -5,6 +5,9 @@ import qualified Shell.Grammar as G
 import Shell.Parse.Lex
 
 -- TODO : Switch to parsec
+-- G.Commands = ([String], [([Fd], Destination)])
+-- G.Pipeline = [G.Commands]
+-- G.List = [G.Pipeline]
 
 parseInput :: String -> G.List
 parseInput = parseList . lexInput
@@ -36,6 +39,7 @@ isOperator ops (Operator s) = s `elem` ops
 isOperator _   _            = False
 
 -- based on bash(1) and dash(1) man pages
+-- These are operators that separate multiple pipelines in the single command.
 listOperators = [ ";", "&", "&&", "||" ]
 pipelineOperators = [ "|", "|&" ]
 redirectionOperators = pipelineOperators ++ [ "<", ">", ">|", "<<", ">>", "<&", ">&", "<<-", "<>" ]

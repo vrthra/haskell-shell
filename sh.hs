@@ -17,6 +17,6 @@ shellLoop st = do
                         | otherwise        -> ioError e
                  Right inStr -> do
                                 newState <- pushHistory st inStr
-                                runList newState $ parseInput inStr
+                                runList newState (parseInput inStr)
                                 shellLoop newState
 
