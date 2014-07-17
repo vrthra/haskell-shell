@@ -4,17 +4,20 @@ import System.Posix.IO (stdInput, stdOutput, stdError)
 import qualified HaskellShell.Grammar as G
 import HaskellShell.Parse.Lex
 
+-- TODO : Switch to parsec
+
 parseInput :: String -> G.List
-parseInput = parseList . flattenQuotes . dropBlanks . lexInput
+parseInput = parseList . lexInput
 
 parseList :: [ShellToken] -> G.List
-parseList = filter (/= [([], [])]) . map parsePipeline . S.splitWhen (isOperator listOperators)
+parseList lst = filter (/= [([], [])]) $ map parsePipeline mylst
+  where mylst = S.splitWhen (isOperator listOperators) lst
 
 parsePipeline :: [ShellToken] -> G.Pipeline
-parsePipeline = map parsePipelineElement . S.split (S.keepDelimsR $ (S.whenElt (isOperator pipelineOperators)))
+parsePipeline lst = map parsePipelineElement $ S.split (S.keepDelimsR $ (S.whenElt (isOperator pipelineOperators))) lst
 
 parsePipelineElement :: [ShellToken] -> G.PipelineElement
-parsePipelineElement = (\(cmd, rs) -> (parseCommand cmd, parseRedirections rs)) . break (isOperator redirectionOperators)
+parsePipelineElement lst = (\(cmd, rs) -> (parseCommand cmd, parseRedirections rs)) $ break (isOperator redirectionOperators) lst
 
 parseRedirections :: [ShellToken] -> [G.Redirection]
 parseRedirections ((Operator "|" ):xs) = ([stdOutput], G.Pipe)
@@ -30,17 +33,16 @@ parseRedirections ((Operator ">&"):(Word s):xs) = ([stdOutput, stdError], G.File
 parseRedirections (_:xs) = parseRedirections xs
 parseRedirections []     = []
 
-{-
-parsePipeOperator :: ShellToken -> G.Pipe
-parsePipeOperator (Operator "|") = G.Pipe
-parsePipeOperator _              = G.NoPipe
--}
-
-parseCommand :: [ShellToken] -> [G.Argument]
+parseCommand :: [ShellToken] -> [String]
 parseCommand = map showToken
 
-flattenQuotes :: [ShellToken] -> [ShellToken]
-flattenQuotes [] = []
-flattenQuotes ((Quote _ s):xs) = (Word s) : flattenQuotes xs
-flattenQuotes (x:xs) = x : flattenQuotes xs
+isOperator :: [String] -> ShellToken -> Bool
+isOperator ops (Operator s) = s `elem` ops
+isOperator _   _            = False
+
+-- based on bash(1) and dash(1) man pages
+listOperators = [ ";", "&", "&&", "||" ]
+pipelineOperators = [ "|", "|&" ]
+redirectionOperators = pipelineOperators ++ [ "<", ">", ">|", "<<", ">>", "<&", ">&", "<<-", "<>" ]
+operators = listOperators ++ redirectionOperators -- "(", ")", ";;"
 

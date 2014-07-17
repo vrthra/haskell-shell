@@ -5,16 +5,16 @@ import System.Exit
 import System.Directory
 import System.IO
 import System.Posix.Env (setEnv)
-import System.Posix.Process as PP
+import qualified System.Posix.Process as PP
 import qualified System.Process as P (StdStream(..))
 import HaskellShell.Error
 import HaskellShell.State
 import HaskellShell.State.History (getHistory)
 import qualified HaskellShell.Grammar as G
 
-type Builtin = ShellState -> Maybe Handle -> [G.Argument] -> IO ()
+type Builtin = ShellState -> Maybe Handle -> [String] -> IO ()
 
-builtins :: [(G.Argument, Builtin)]
+builtins :: [(String, Builtin)]
 builtins = [ ("cd", changeDir)
            , ("pwd", printDir)
            , ("exit", exitShell)
@@ -23,7 +23,7 @@ builtins = [ ("cd", changeDir)
            , ("setenv", setEnvironment)
            ]
 
-runBuiltin :: ShellState -> Maybe Handle -> Builtin -> [G.Argument] -> IO ()
+runBuiltin :: ShellState -> Maybe Handle -> Builtin -> [String] -> IO ()
 runBuiltin st h b (name:args) = handle (shellException stdout [name]) $ b st h args
 
 mhPutStrLn (Just h) s = hPutStrLn h s
@@ -34,9 +34,7 @@ changeDir _ _ (dir:_) = setCurrentDirectory dir
 
 printDir _ h _ = getCurrentDirectory >>= mhPutStrLn h
 
-exitShell _ h [] = do
-                 mhPutStrLn h "exit"
-                 exitSuccess
+exitShell _ h [] = exitSuccess
 
 execCommand _ _ (cmd:args) = PP.executeFile cmd True args Nothing
 

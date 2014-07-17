@@ -1,8 +1,7 @@
 module HaskellShell.Grammar where
 import System.Posix.Types (Fd)
 
-type Argument = String
-type Command = [Argument]
+type Command = [String]
 type Stream = Fd
 data Destination = Pipe | File FilePath | AppendFile FilePath
                    deriving (Eq, Show)

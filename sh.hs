@@ -13,7 +13,7 @@ shellLoop :: ShellState -> IO ()
 shellLoop st = do
                input <- IOE.tryIOError promptInput
                case input of
-                 Left e | IOE.isEOFError e -> putStrLn "exit"
+                 Left e | IOE.isEOFError e -> putStrLn ""
                         | otherwise        -> ioError e
                  Right inStr -> do
                                 newState <- pushHistory st inStr

@@ -1,24 +1,24 @@
 module HaskellShell.Input (promptInput) where
-import System.IO
-import System.Posix.Env
-import System.Posix.Signals
+import qualified System.IO as SIO
+import qualified System.Posix.Env as Env
+import qualified System.Posix.Signals as Signals
 
-promptInput = do
-              installHandler keyboardSignal (Catch newShellPrompt) Nothing
-              shellPrompt
-              input <- getInput
-              installHandler keyboardSignal (Catch blankLine) Nothing
-              return input
+promptInput = do sighandle newShellPrompt
+                 shellPrompt
+                 input <- getInput
+                 sighandle blankLine
+                 return input
 
-shellPrompt = do
-              getEnvDefault "PS1" "" >>= putStr
-              hFlush stdout
+sighandle f = Signals.installHandler Signals.keyboardSignal (Signals.Catch f) Nothing
+
+
+shellPrompt = do x <- Env.getEnvDefault "PS1" ""
+                 putStr x
+                 SIO.hFlush SIO.stdout
 
 blankLine = putStrLn ""
 
-newShellPrompt = do
-                 blankLine
-                 shellPrompt
+newShellPrompt = blankLine >> shellPrompt
 
 getInput :: IO String
 getInput = do
@@ -30,7 +30,7 @@ getInput = do
                 return (init line ++ next)
            else return line
 
-secondaryPrompt = do
-                  getEnvDefault "PS2" "" >>= putStr
-                  hFlush stdout
+secondaryPrompt = do x <- Env.getEnvDefault "PS2" ""
+                     putStr x
+                     SIO.hFlush SIO.stdout
 
